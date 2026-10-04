@@ -1,0 +1,1306 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cloud Disaster Recovery System</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+/* ================= HEADER ================= */
+
+header {
+    background: linear-gradient(135deg, #0f172a, #1e40af);
+    color: white;
+    padding: 18px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #60a5fa;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.cloud-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 14px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    background: #22c55e;
+    border-radius: 50%;
+}
+
+/* ================= CONTAINER ================= */
+
+.container {
+    width: 92%;
+    max-width: 1250px;
+    margin: 30px auto;
+}
+
+/* ================= WELCOME ================= */
+
+.welcome {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+}
+
+.welcome h1 {
+    color: #1e3a8a;
+    margin-bottom: 8px;
+}
+
+.welcome p {
+    color: #64748b;
+}
+
+/* ================= STATISTICS ================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+}
+
+.stat-icon {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.stat-card h3 {
+    font-size: 26px;
+    margin-bottom: 5px;
+}
+
+.stat-card p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+/* ================= DASHBOARD ================= */
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 23px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+}
+
+.card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card-title h2 {
+    font-size: 19px;
+}
+
+/* ================= BACKUP TABLE ================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    background: #eff6ff;
+    color: #1e40af;
+    padding: 13px;
+    font-size: 13px;
+}
+
+td {
+    padding: 13px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 13px;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.completed {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.running {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.failed {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+/* ================= BUTTONS ================= */
+
+button {
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-weight: bold;
+}
+
+.backup-btn {
+    background: #2563eb;
+    color: white;
+}
+
+.backup-btn:hover {
+    background: #1d4ed8;
+}
+
+.restore-btn {
+    background: #16a34a;
+    color: white;
+}
+
+.restore-btn:hover {
+    background: #15803d;
+}
+
+.disaster-btn {
+    width: 100%;
+    background: #dc2626;
+    color: white;
+    padding: 15px;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.disaster-btn:hover {
+    background: #b91c1c;
+}
+
+/* ================= RECOVERY PLAN ================= */
+
+.recovery-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.recovery-number {
+    width: 35px;
+    height: 35px;
+    background: #dbeafe;
+    color: #1d4ed8;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.recovery-item strong {
+    font-size: 14px;
+}
+
+.recovery-item p {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 3px;
+}
+
+/* ================= PROGRESS ================= */
+
+.progress-container {
+    margin-top: 20px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 7px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 78%;
+    height: 100%;
+    background: #2563eb;
+    border-radius: 10px;
+}
+
+/* ================= LOGS ================= */
+
+.logs {
+    margin-top: 25px;
+}
+
+.log {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 13px;
+}
+
+.log-icon {
+    font-size: 18px;
+}
+
+.log-time {
+    color: #64748b;
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+/* ================= MODAL ================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15,23,42,0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-box {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    padding: 30px;
+    border-radius: 18px;
+    text-align: center;
+}
+
+.modal-box h2 {
+    color: #dc2626;
+    margin-bottom: 12px;
+}
+
+.modal-box p {
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.confirm {
+    background: #dc2626;
+    color: white;
+}
+
+.cancel {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+/* ================= NOTIFICATION ================= */
+
+.notification {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    background: #0f172a;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    display: none;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    z-index: 200;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #64748b;
+    font-size: 13px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width: 950px) {
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media(max-width: 600px) {
+
+    header {
+        padding: 15px;
+    }
+
+    .cloud-status {
+        display: none;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        width: 94%;
+    }
+
+    table {
+        font-size: 11px;
+    }
+
+    th,
+    td {
+        padding: 8px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+        ☁️ Cloud<span>Recover</span>
+    </div>
+
+    <div class="header-right">
+
+        <div class="cloud-status">
+            <span class="status-dot"></span>
+            Cloud System Online
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container">
+
+    <!-- Welcome -->
+
+    <section class="welcome">
+
+        <h1>Cloud-Based Disaster Recovery System</h1>
+
+        <p>
+            Monitor backups, manage recovery operations and protect
+            critical data using cloud-based disaster recovery services.
+        </p>
+
+    </section>
+
+
+    <!-- Statistics -->
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">💾</div>
+
+            <h3 id="backupCount">24</h3>
+
+            <p>Total Backups</p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">☁️</div>
+
+            <h3>99.9%</h3>
+
+            <p>Cloud Availability</p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">🛡️</div>
+
+            <h3>100%</h3>
+
+            <p>Data Protection</p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">⏱️</div>
+
+            <h3 id="recoveryTime">4m 32s</h3>
+
+            <p>Recovery Time</p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Dashboard -->
+
+    <section class="dashboard">
+
+
+        <!-- Backup Management -->
+
+        <div>
+
+            <div class="card">
+
+                <div class="card-title">
+
+                    <h2>📦 Backup Management</h2>
+
+                    <button
+                        class="backup-btn"
+                        onclick="createBackup()">
+                        + Create Backup
+                    </button>
+
+                </div>
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Backup Name</th>
+                            <th>Size</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="backupTable">
+
+                        <tr>
+
+                            <td>Database_Backup</td>
+
+                            <td>2.4 GB</td>
+
+                            <td>Cloud Storage</td>
+
+                            <td>
+                                <span class="status completed">
+                                    Completed
+                                </span>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="restore-btn"
+                                    onclick="restoreBackup('Database Backup')">
+                                    Restore
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>User_Files</td>
+
+                            <td>5.8 GB</td>
+
+                            <td>Cloud Storage</td>
+
+                            <td>
+                                <span class="status completed">
+                                    Completed
+                                </span>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="restore-btn"
+                                    onclick="restoreBackup('User Files')">
+                                    Restore
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>Application_Data</td>
+
+                            <td>1.7 GB</td>
+
+                            <td>Cloud Storage</td>
+
+                            <td>
+                                <span class="status running">
+                                    Running
+                                </span>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="restore-btn"
+                                    onclick="restoreBackup('Application Data')">
+                                    Restore
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>System_Config</td>
+
+                            <td>850 MB</td>
+
+                            <td>Cloud Storage</td>
+
+                            <td>
+                                <span class="status completed">
+                                    Completed
+                                </span>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="restore-btn"
+                                    onclick="restoreBackup('System Configuration')">
+                                    Restore
+                                </button>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- Progress -->
+
+            <div class="card" style="margin-top:25px;">
+
+                <div class="card-title">
+
+                    <h2>🔄 Recovery Progress</h2>
+
+                    <strong id="progressText">78%</strong>
+
+                </div>
+
+                <div class="progress-container">
+
+                    <div class="progress-info">
+
+                        <span>System Recovery</span>
+
+                        <span id="progressStatus">
+                            Operational
+                        </span>
+
+                    </div>
+
+                    <div class="progress-bar">
+
+                        <div
+                            class="progress"
+                            id="progressBar">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Logs -->
+
+            <div class="card logs">
+
+                <div class="card-title">
+
+                    <h2>📋 Recovery Activity</h2>
+
+                </div>
+
+
+                <div id="logs">
+
+                    <div class="log">
+
+                        <div class="log-icon">✅</div>
+
+                        <div>
+
+                            <strong>
+                                Database backup completed
+                            </strong>
+
+                            <div class="log-time">
+                                Today, 10:30 AM
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="log">
+
+                        <div class="log-icon">☁️</div>
+
+                        <div>
+
+                            <strong>
+                                Data synchronized with cloud
+                            </strong>
+
+                            <div class="log-time">
+                                Today, 10:15 AM
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="log">
+
+                        <div class="log-icon">🛡️</div>
+
+                        <div>
+
+                            <strong>
+                                Security verification completed
+                            </strong>
+
+                            <div class="log-time">
+                                Today, 09:45 AM
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Recovery Plan -->
+
+        <div>
+
+            <div class="card">
+
+                <div class="card-title">
+
+                    <h2>🚨 Disaster Recovery</h2>
+
+                </div>
+
+
+                <p style="color:#64748b;font-size:13px;line-height:1.6;">
+
+                    In case of a system disaster, initiate the
+                    recovery process to restore critical data
+                    and services from cloud backups.
+
+                </p>
+
+
+                <button
+                    class="disaster-btn"
+                    onclick="openDisasterModal()">
+
+                    🚨 Start Disaster Recovery
+
+                </button>
+
+            </div>
+
+
+            <div class="card" style="margin-top:25px;">
+
+                <div class="card-title">
+
+                    <h2>🔧 Recovery Plan</h2>
+
+                </div>
+
+
+                <div class="recovery-item">
+
+                    <div class="recovery-number">
+                        1
+                    </div>
+
+                    <div>
+
+                        <strong>Detect Failure</strong>
+
+                        <p>
+                            Identify system failure
+                            or disaster.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="recovery-item">
+
+                    <div class="recovery-number">
+                        2
+                    </div>
+
+                    <div>
+
+                        <strong>Activate Backup</strong>
+
+                        <p>
+                            Select the latest cloud backup.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="recovery-item">
+
+                    <div class="recovery-number">
+                        3
+                    </div>
+
+                    <div>
+
+                        <strong>Restore Data</strong>
+
+                        <p>
+                            Restore applications and data.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="recovery-item">
+
+                    <div class="recovery-number">
+                        4
+                    </div>
+
+                    <div>
+
+                        <strong>Verify System</strong>
+
+                        <p>
+                            Check recovered services.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="recovery-item">
+
+                    <div class="recovery-number">
+                        5
+                    </div>
+
+                    <div>
+
+                        <strong>Return to Normal</strong>
+
+                        <p>
+                            Resume normal operations.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Cloud Infrastructure -->
+
+            <div class="card" style="margin-top:25px;">
+
+                <div class="card-title">
+
+                    <h2>☁️ Cloud Infrastructure</h2>
+
+                </div>
+
+                <p style="font-size:13px;margin-bottom:10px;">
+                    Primary Cloud
+                </p>
+
+                <strong>🟢 Cloud Server Online</strong>
+
+                <hr style="margin:18px 0;border:none;border-top:1px solid #e2e8f0;">
+
+                <p style="font-size:13px;margin-bottom:10px;">
+                    Backup Server
+                </p>
+
+                <strong>🟢 Backup Server Online</strong>
+
+                <hr style="margin:18px 0;border:none;border-top:1px solid #e2e8f0;">
+
+                <p style="font-size:13px;margin-bottom:10px;">
+                    Database
+                </p>
+
+                <strong>🟢 Database Healthy</strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- ================= MODAL ================= -->
+
+<div class="modal" id="disasterModal">
+
+    <div class="modal-box">
+
+        <h2>⚠️ Start Disaster Recovery?</h2>
+
+        <p>
+            This demo will simulate the disaster recovery
+            process. The system will restore data from the
+            latest cloud backup.
+        </p>
+
+        <div class="modal-buttons">
+
+            <button
+                class="confirm"
+                onclick="startRecovery()">
+                Start Recovery
+            </button>
+
+            <button
+                class="cancel"
+                onclick="closeModal()">
+                Cancel
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= NOTIFICATION ================= -->
+
+<div
+    class="notification"
+    id="notification">
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    © 2026 CloudRecover |
+    Cloud-Based Disaster Recovery System
+
+</footer>
+
+
+<script>
+
+/* ================= NOTIFICATION ================= */
+
+function showNotification(message) {
+
+    const notification =
+        document.getElementById("notification");
+
+    notification.textContent = message;
+
+    notification.style.display = "block";
+
+    setTimeout(function() {
+
+        notification.style.display = "none";
+
+    }, 3000);
+
+}
+
+
+/* ================= CREATE BACKUP ================= */
+
+function createBackup() {
+
+    const table =
+        document.getElementById("backupTable");
+
+    const row =
+        document.createElement("tr");
+
+    row.innerHTML = `
+
+        <td>New_Backup_${Date.now().toString().slice(-4)}</td>
+
+        <td>1.2 GB</td>
+
+        <td>Cloud Storage</td>
+
+        <td>
+            <span class="status running">
+                Running
+            </span>
+        </td>
+
+        <td>
+            <button
+                class="restore-btn"
+                onclick="restoreBackup('New Backup')">
+                Restore
+            </button>
+        </td>
+
+    `;
+
+    table.prepend(row);
+
+
+    let count =
+        parseInt(
+            document.getElementById("backupCount")
+            .textContent
+        );
+
+    count++;
+
+    document.getElementById("backupCount")
+        .textContent = count;
+
+
+    showNotification(
+        "☁️ Cloud backup started successfully!"
+    );
+
+
+    setTimeout(function() {
+
+        const status =
+            row.querySelector(".status");
+
+        status.textContent = "Completed";
+
+        status.className =
+            "status completed";
+
+        addLog(
+            "New cloud backup completed",
+            "✅"
+        );
+
+        showNotification(
+            "✅ Backup completed successfully!"
+        );
+
+    }, 3000);
+
+}
+
+
+/* ================= RESTORE BACKUP ================= */
+
+function restoreBackup(name) {
+
+    showNotification(
+        "🔄 Restoring " + name + "..."
+    );
+
+
+    setTimeout(function() {
+
+        showNotification(
+            "✅ " + name +
+            " restored successfully!"
+        );
+
+        addLog(
+            name + " restored from cloud backup",
+            "🔄"
+        );
+
+    }, 2500);
+
+}
+
+
+/* ================= DISASTER MODAL ================= */
+
+function openDisasterModal() {
+
+    document.getElementById(
+        "disasterModal"
+    ).style.display = "flex";
+
+}
+
+
+function closeModal() {
+
+    document.getElementById(
+        "disasterModal"
+    ).style.display = "none";
+
+}
+
+
+/* ================= START RECOVERY ================= */
+
+function startRecovery() {
+
+    closeModal();
+
+
+    showNotification(
+        "🚨 Disaster recovery process started!"
+    );
+
+
+    let progress = 0;
+
+    const progressBar =
+        document.getElementById("progressBar");
+
+    const progressText =
+        document.getElementById("progressText");
+
+    const progressStatus =
+        document.getElementById("progressStatus");
+
+
+    progressBar.style.width = "0%";
+
+    progressText.textContent = "0%";
+
+    progressStatus.textContent =
+        "Recovering";
+
+
+    const interval =
+        setInterval(function() {
+
+            progress += 5;
+
+            progressBar.style.width =
+                progress + "%";
+
+            progressText.textContent =
+                progress + "%";
+
+
+            if (progress >= 100) {
+
+                clearInterval(interval);
+
+
+                progressStatus.textContent =
+                    "Operational";
+
+
+                showNotification(
+                    "✅ Disaster recovery completed!"
+                );
+
+
+                addLog(
+                    "Disaster recovery completed successfully",
+                    "✅"
+                );
+
+            }
+
+        }, 150);
+
+}
+
+
+/* ================= ADD LOG ================= */
+
+function addLog(message, icon) {
+
+    const logs =
+        document.getElementById("logs");
+
+
+    const log =
+        document.createElement("div");
+
+    log.className = "log";
+
+
+    const currentTime =
+        new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit"
+        });
+
+
+    log.innerHTML = `
+
+        <div class="log-icon">
+            ${icon}
+        </div>
+
+        <div>
+
+            <strong>
+                ${message}
+            </strong>
+
+            <div class="log-time">
+                Today, ${currentTime}
+            </div>
+
+        </div>
+
+    `;
+
+
+    logs.prepend(log);
+
+}
+
+
+/* ================= CLOSE MODAL ================= */
+
+window.onclick = function(event) {
+
+    const modal =
+        document.getElementById(
+            "disasterModal"
+        );
+
+    if (event.target === modal) {
+
+        closeModal();
+
+    }
+
+};
+
+</script>
+
+</body>
+</html>
+```
